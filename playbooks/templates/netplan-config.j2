@@ -1,0 +1,22 @@
+network:
+  version: 2
+
+  ethernets:
+    {{ interface }}:
+      dhcp4: false
+
+  bridges:
+    br0:
+      interfaces:
+        - {{ interface }}
+      addresses:
+        - {{target_ip}}/22
+      nameservers:
+        addresses:
+          - 200.19.177.65
+          - 200.19.190.1
+        search:
+          - "ufc.br"
+      routes:
+        - to: default
+          via: 10.11.12.1

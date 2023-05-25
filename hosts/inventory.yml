@@ -3,8 +3,9 @@ cluster:
     dedic:
       hosts:
         dedic01:
-          ansible_host: 10.11.14.56
+          ansible_host: 10.11.15.1
           target_ip: 10.11.15.1
+          interface: enp2s0
     virt:
     xeon:
   vars:

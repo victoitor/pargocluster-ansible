@@ -13,10 +13,17 @@
 
     - name: Set hostname
       command: "hostnamectl set-hostname {{ inventory_hostname }}"
-      changed_when: false
+      when: ansible_nodename != inventory_hostname
     
     - name: Set snap refresh time
-      command: "snap set system refresh.timer=1:00-5:00/2"
+      command: "snap set system refresh.timer=2:00-4:00"
       changed_when: false
 
-    - name: 
+    - name: Update network configuration
+      template: 
+        src: netplan-config.j2
+        dest: /etc/netplan/00-snapd-config.yaml
+        owner: root
+        group: adm
+        mode: 0600
+      notify: Apply netplan
