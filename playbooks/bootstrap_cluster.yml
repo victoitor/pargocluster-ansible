@@ -15,6 +15,14 @@
       command: "snap set system refresh.timer=1:00-4:00"
       changed_when: false
 
+    - name: Install lxd/microcloud stack
+      snap:
+        name:
+          - lxd
+          - microovn
+          - microcloud
+          - microceph
+
     - name: Update network configuration
       template: 
         src: netplan-config.j2
