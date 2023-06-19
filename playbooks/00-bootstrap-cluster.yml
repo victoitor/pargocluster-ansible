@@ -8,25 +8,25 @@
       timezone: name=America/Fortaleza
 
     - name: Set hostname
-      command: "hostnamectl set-hostname {{ inventory_hostname }}"
-      when: ansible_nodename != inventory_hostname
+      hostname: 
+        name: "{{ inventory_hostname }}"
     
     - name: Set snap refresh timer
       command: "snap set system refresh.timer=1:00-4:00"
       changed_when: false
 
-    - name: Install lxd/microcloud stack
-      snap:
-        name:
-          - lxd
-          - microovn
-          - microcloud
-          - microceph
+    - name: Add pargocluster user to sudoers
+      copy:
+        src: sudoers-pargocluster
+        dest: /etc/sudoers.d/pargocluster
+        owner: root
+        group: root
+        mode: 0440
 
     - name: Update network configuration
       template: 
         src: netplan-config.j2
-        dest: /etc/netplan/00-snapd-config.yaml
+        dest: /etc/netplan/00-installer-config.yaml
         owner: root
         group: adm
         mode: 0600

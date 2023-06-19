@@ -1,0 +1,10 @@
+---
+
+- hosts: cluster
+  become: true
+
+  tasks:
+    - name: Install lxd
+      snap:
+        name:
+          - lxd
