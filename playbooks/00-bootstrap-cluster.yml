@@ -23,6 +23,11 @@
         group: root
         mode: 0440
 
+    - name: Install lxd
+      snap:
+        name:
+          - lxd
+
     - name: Update network configuration
       template: 
         src: netplan-config.j2

@@ -1,8 +1,0 @@
----
-
-- hosts: cluster
-  become: true
-
-  tasks:
-    - name: Wipe local partition
-      command: "wipefs -a /dev/nvme0n1p4"
